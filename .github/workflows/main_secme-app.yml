@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v1
       with:
         registry: https://index.docker.io/v1/
-        username: ${{ secrets.AzureAppService_ContainerUsername_d427334b03404f63aedd203c5221bce3 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_f25f0cf81c964d0496c54517b7cb6b5d }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_bc71a2fac9fd4402a1180885e331497f }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_3c02a483ebb6424a9d8858746d1a2e24 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_d427334b03404f63aedd203c5221bce3 }}/secme-app:${{ github.sha }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_bc71a2fac9fd4402a1180885e331497f }}/secme-app:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'secme-app'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_e36a9c0c0d9b4964ad473de3647e07b3 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_d427334b03404f63aedd203c5221bce3 }}/secme-app:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_02bd9bfc9f4d4434856ef1923485b81a }}
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_bc71a2fac9fd4402a1180885e331497f }}/secme-app:${{ github.sha }}'
