@@ -13,7 +13,7 @@ import "../../assets/file.css";
 import {useAuth0} from "@auth0/auth0-react";
 
 const UploadFile = () => {
-    const {user} = useAuth0();
+    const {user, getAccessTokenSilently} = useAuth0();
     const [selectedFile, setSelectedFile] = useState([]);
     const [fileBase64String, setFileBase64String] = useState("");
     const [fileName, setFileName] = useState("");
@@ -70,15 +70,18 @@ const UploadFile = () => {
                 "type": selectedFile[0].type,
                 "fileSize": selectedFile[0].size,
             }
-            await FileService.uploadFile(data).then((res) => {
+
+            const token = await getAccessTokenSilently();
+
+            await FileService.uploadFile(data, token).then((res) => {
                 setSelectedFile(null);
                 setFileBase64String("");
                 setFileName("");
                 setIsLoaded(false);
                 if (res.status === 200) {
-                    ToastMessages("success", "File Uploaded Successfully");
+                    ToastMessages("success", "File Uploaded Successfully!");
                 } else {
-                    ToastMessages("error", "File Upload Failed");
+                    ToastMessages("error", "File Upload Failed!");
                 }
             }).catch((err) => {
                 if (err.response.status === 403 || err.response.status === 401) {

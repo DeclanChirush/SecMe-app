@@ -6,8 +6,8 @@ import {useAuth0} from "@auth0/auth0-react";
 function MainNavBar(props) {
     const {loginWithRedirect, logout, user, isAuthenticated} = useAuth0();
 
-    const setSessionStorage = (email) => {
-        sessionStorage.setItem('user-email', email);
+    const setSessionStorage = async (email) => {
+        await sessionStorage.setItem('user-email', email);
     }
 
     const removeSessionStorage = () => {

@@ -1,8 +1,16 @@
+/**
+ * SSD - SecMe API
+ *
+ * @Author IT19180526 - S.A.N.L.D. Chandrasiri
+ * @Description This file for Auth service functions
+ * @Version 1.0
+ */
+
 import remote_url from './deployment.json'
 import axios from "axios";
 
 class AuthService {
-    BASE_URL = remote_url.remoteAddress + "/api/auth/";
+    BASE_URL = remote_url.localAddress + "/api/auth/";
 
 
     publicCall() {
